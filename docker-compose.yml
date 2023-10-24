@@ -3,7 +3,7 @@ services:
     hostname: minio
     image: quay.io/minio/minio
     volumes:
-      - /home/albert/tmp/minio:/data
+      - ./data/minio:/data
     environment:
       - "MINIO_ROOT_USER=test"
       - "MINIO_ROOT_PASSWORD=test1234"
@@ -15,7 +15,7 @@ services:
   databend:
     image: datafuselabs/databend
     volumes:
-      - /home/albert/test/databend/conf/databend-query.toml:/etc/databend/query.toml
+      - ./conf/databend-query.toml:/etc/databend/query.toml
     environment:
       QUERY_CONFIG_FILE: /etc/databend/query.toml
       QUERY_DEFAULT_USER: databend
