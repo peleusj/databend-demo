@@ -1,0 +1,27 @@
+services:
+  minio:
+    hostname: minio
+    image: quay.io/minio/minio
+    volumes:
+      - /home/albert/tmp/minio:/data
+    environment:
+      - "MINIO_ROOT_USER=test"
+      - "MINIO_ROOT_PASSWORD=test1234"
+    ports:
+      - "9001:9001"
+      - "9000:9000"
+    command: [ "server", "/data", "--console-address", ":9001" ]
+
+  databend:
+    image: datafuselabs/databend
+    volumes:
+      - /home/albert/test/databend/conf/databend-query.toml:/etc/databend/query.toml
+    environment:
+      QUERY_CONFIG_FILE: /etc/databend/query.toml
+      QUERY_DEFAULT_USER: databend
+      QUERY_DEFAULT_PASSWORD: databend
+    ports:
+      - '8000:8000'
+      - '3307:3307'
+      - '8124:8124'
+
